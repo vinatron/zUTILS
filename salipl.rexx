@@ -9,22 +9,31 @@ SAY 'WARNING!!! DO NOT ATTEMPT UNLESS YOU KNOW WHAT YOU ARE DOING!' /* CONTINUE 
 PULL ANSWER1                                  /* STORE RESPONCE */
 IF ANSWER1 = 'Y' THEN DO                      /* CHECK CONDITONAL 1 */
  SAY 'PREFORMING IPL OF GUESTS: PLEASE WAIT'  /* NOTIFY USER */
- CALL ALLGUESTSIPL                            /* CALL SUB */
+ CALL SALIPL                                  /* CALL SUB */
  END                                          /* END CONTITONAL 1 */
 ELSE                                          /* CHECK CONDITONAL 1 */
  IF ANSWER1 = 'N' THEN DO                     /* CHECK CONDITONAL 1.5 */
-  SAY 'WOULD YOU LIKE TO USE THE PANEL INTERFACE? Y/N'/* REQUEST INPUT */
-  PULL ANSWER2                                /* STORE RESPONCE */
-  IF ANSWER2 = 'Y' THEN                       /* CHECK CONDITONAL 2 */
-   SAY 'OK LAUNCHING PANEL: PLEASE WIAT...'   /* NOTIFY USER */
-  ELSE                                        /* CHECK CONDITONAL 2 */
-   IF ANSWER2 = 'N' THEN DO                   /* CHECK CONDITONAL 2.5 */
-    SAY 'LAUNCHING INTERACTIVE MODE: PLEASE WAIT...'    /* NOTIFY USER */
-    CALL GUESTIPL                             /* CALL SUB */
-    END                                       /* END CONDITONAL 2.5 */
-   ELSE
-    SAY 'INVALID INPUT TERMINATING'           /* NOTIFY USER */
-    END
+  SAY 'TERMINATED BY USER'                    /* REQUEST INPUT */
  ELSE                                         /* CHECK CONDITONAL 1.5 */
   SAY 'INVALID INPUT TERMINATING'             /* NOTIFY USER */
 EXIT                                          /* END OF PROGRAM */
+/********************************************
+* INTERACTIVE SALIPL SUBROUTINE             *
+*********************************************/
+SALIPL:
+ SAY 'WHATS THE IODEVICE OF THE FCP CHANNEL?' /* REQUEST INPUT */
+ PULL IODEV                                   /* STORE DEVICE CHANNEL */
+ SAY 'WHAT CPLOAD MODULE DO YOU WANT TO LOAD? /* REQUEST INPUT */
+ SAY 'DEFAULT IS CPLOAD PLEASE INPUT DEFAULT IF YOU DONT KNOW' /* CONTINUE REQUEST */
+ PULL CPLOAD                                  /* STORE CPLOAD MODULE */
+ SAY 'INPUT WWPN OF STORAGE TARGET'           /* REQUEST INPUT */
+ PULL WWPN                                    /* STORE WWPN */
+ SAY 'INPUT LUN FOR RES VOLUME'               /* REQUEST INPUT */
+ PULL LUN                                     /* STORE LUN */
+ SAY 'INPUT EDEV ADDRESS FOR SYSTRES'         /* REQUEST INPUT */
+ PULL EDEV                                    /* STORE EDEV ADDR */
+ SAY 'INPUT CONSOLE ADDRESS'                  /* REQUEST INPUT */
+ PULL CONS                                    /* STORE CONSOLE ADDRESS */
+ SAY 'WRIGHTING SALIPL TRACK WITH SPECIFIED PARMS' /* NOTIFY USER */
+ 'SALIPL' IODEV '(MODULE' CPLOAD 'OFFSET 0 ORIGN 2000 WWPN' WWPN 'LUN' LUN 'DEVICE' EDEV 'IPLPARMS CONS=' CONS 'PDVOL=' EDEV
+RETURN                                        /* END OF SUB */
