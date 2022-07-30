@@ -8,7 +8,6 @@ SAY 'ARE YOU SURE YOU WANT TO WRITE A NEW SALIPL TRACK? Y/N'        /* REQUEST I
 SAY 'WARNING!!! DO NOT ATTEMPT UNLESS YOU KNOW WHAT YOU ARE DOING!' /* CONTINUE REQUEST */
 PULL ANSWER1                                  /* STORE RESPONCE */
 IF ANSWER1 = 'Y' THEN DO                      /* CHECK CONDITONAL 1 */
- SAY 'PREFORMING IPL OF GUESTS: PLEASE WAIT'  /* NOTIFY USER */
  CALL SALIPL                                  /* CALL SUB */
  END                                          /* END CONTITONAL 1 */
 ELSE                                          /* CHECK CONDITONAL 1 */
