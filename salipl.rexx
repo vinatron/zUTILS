@@ -14,6 +14,7 @@ IF ANSWER1 = 'Y' THEN DO                      /* CHECK CONDITONAL 1 */
 ELSE                                          /* CHECK CONDITONAL 1 */
  IF ANSWER1 = 'N' THEN DO                     /* CHECK CONDITONAL 1.5 */
   SAY 'TERMINATED BY USER'                    /* REQUEST INPUT */
+  END
  ELSE                                         /* CHECK CONDITONAL 1.5 */
   SAY 'INVALID INPUT TERMINATING'             /* NOTIFY USER */
 EXIT                                          /* END OF PROGRAM */
