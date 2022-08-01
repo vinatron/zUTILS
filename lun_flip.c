@@ -39,8 +39,8 @@ int main(int argc, char* argv[]) {
     }
 
     /* Go back and print the arrays, which do not have null terminators */
-    for(i = 0; i < 4; i++) {
-        for(j = 3; j >= 0; j--) {
+    for(i = 3; i >= 0; i--) {
+        for(j = 0; j < 4; j++) {
             printf("%c", chunks[i][j]);
         }
     }
