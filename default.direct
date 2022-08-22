@@ -1,0 +1,11 @@
+USER USERID12 PASSWD12 128M 1000M G                                     DEF00010
+   IPL 620                                                              DEF00020
+   MACH XA                                                              DEF00030
+   CONSOLE 0009 3215 T                                                  DEF00040
+   SPOOL 000C 2540 READER *                                             DEF00050
+   SPOOL 000D 2540 PUNCH A                                              DEF00060
+   SPOOL 000E 1403 A                                                    DEF00070
+   LINK MAINT 0620 0620 RR                                              DEF00080
+   LINK MAINT 019E 019E RR                                              DEF00090
+   LINK MAINT 019D 019D RR                                              DEF00100
+   LINK MAINT 0190 0190 RR                                              DEF00110
