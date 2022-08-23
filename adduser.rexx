@@ -39,7 +39,7 @@ END
 CALL COPY_FILE                               /* CALL SUB */
 CALL UPDATEPARMS                             /* CALL SUB */
 'DIRM ADD' USERID                            /* INVOKE DIRMAINT */
-SLEEP(20)                                    /* SLEEP 20 SECOUNDS */
+CALL SLEEP 20                                /* SLEEP 20 SECOUNDS */
 CALL MOVE_FILE                               /* MOVE DIRECTORY FILE */
 'AMDISK' USERID 191                          /* INVOKE AMDISK ASSIST FACILITY */
 
