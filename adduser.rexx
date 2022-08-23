@@ -76,7 +76,7 @@ RETURN
 *********************************************/
 MOVE_FILE:
  SAY 'MOVING DIRECT FILE TO D DISK'           /* NOTIFY USER */
- 'COPY' USERID 'DIRECT A = = D'               /* INVOKE COPY */
+ 'COPY' USERID 'DIRECT A = = D (REPLACE'      /* INVOKE COPY */
  'ERASE' USERID 'DIRECT A'                    /* INVOKE ERASE */
 RETURN
 
