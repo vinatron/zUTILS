@@ -49,8 +49,8 @@ EXIT                                         /* END OF PROGRAM */
 * COPY DEFAULT DIRECT TEMPLATE SUBROUTINE   *
 *********************************************/
 COPY_FILE:
- SAY 'COPYING TEMPLATE TO:' USERID 'DIRECT A' /* NOTIFY USER*/
- 'COPY DEFAULT DIRECT A' USERID 'DIRECT A'    /* INVOKE COPY */
+ SAY 'COPYING TEMPLATE TO:' USERID 'DIRECT A'         /* NOTIFY USER*/
+ 'COPY DEFAULT DIRECT A' USERID 'DIRECT A (REPLACE'   /* INVOKE COPY */
 RETURN
 
 /********************************************
