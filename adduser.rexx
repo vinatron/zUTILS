@@ -6,6 +6,8 @@
 
 TRACE E                                      /* ERROR TRACING */
 
+PARSE ARG USERID PASSWD
+
 /* BANNER START */
 SAY "STARTING VINATRON'S DIRMAINT ADD USER FACILITY"
 SAY 'PROPRETY OF:'                           /* BANNER */
@@ -13,11 +15,15 @@ SAY 'VINATRON TECHNOLOGY AND ELECTRICAL'     /* BANNER END */
 
 SIGNAL ON ERROR                              /* TEST RC OF COMMANDS */
 
-SAY 'USERID NAME MUST NOT EXCEED 8 CHAR'     /* REQUEST INPUT */
-PULL USERID                                  /* STORE USERID */
-/* REQUEST INPUT */
-SAY 'PASSWORD FOR USERID MUST NOT EXCEED 8 CHAR'
-PULL PASSWD                                  /* STORE PASSWORD */
+IF LENGTH(USERID) = 0 THEN DO                /* TEST ARG USERID */
+ SAY 'USERID NAME MUST NOT EXCEED 8 CHAR'    /* REQUEST INPUT */
+ PULL USERID                                 /* STORE USERID */
+END                                          /* END IF TEST ARG */
+IF LENGTH(PASSWD) = 0 THEN DO                /* TEST ARG PASSWD */
+ /* REQUEST INPUT */
+ SAY 'PASSWORD FOR USERID MUST NOT EXCEED 8 CHAR'
+ PULL PASSWD                                 /* STORE PASSWORD */
+END                                          /* END IF TEST ARG */
 TEST_USERID:                                 /* JUMP LABEL */
 IF LENGTH(USERID) > 8 THEN DO                /* TEST USERID LENGTH */
  SAY 'INVALID LENGTH INPUT NEW USERID!'      /* NOTIFY USER */
@@ -33,8 +39,9 @@ END
 CALL COPY_FILE                               /* CALL SUB */
 CALL UPDATEPARMS                             /* CALL SUB */
 'DIRM ADD' USERID                            /* INVOKE DIRMAINT */
+'CP SLEEP 20 SEC'                            /* SLEEP 20 SECOUNDS */
 CALL MOVE_FILE                               /* MOVE DIRECTORY FILE */
-'AMDISK'                                     /* INVOKE AMDISK ASSIST FACILITY */
+'AMDISK' USERID 191                          /* INVOKE AMDISK ASSIST FACILITY */
 
 EXIT                                         /* END OF PROGRAM */
 
@@ -42,8 +49,8 @@ EXIT                                         /* END OF PROGRAM */
 * COPY DEFAULT DIRECT TEMPLATE SUBROUTINE   *
 *********************************************/
 COPY_FILE:
- SAY 'COPYING TEMPLATE TO:' USERID 'DIRECT A' /* NOTIFY USER*/
- 'COPY DEFAULT DIRECT A' USERID 'DIRECT A'    /* INVOKE COPY */
+ SAY 'COPYING TEMPLATE TO:' USERID 'DIRECT A'         /* NOTIFY USER*/
+ 'COPY DEFAULT DIRECT A' USERID 'DIRECT A (REPLACE'   /* INVOKE COPY */
 RETURN
 
 /********************************************
@@ -69,7 +76,7 @@ RETURN
 *********************************************/
 MOVE_FILE:
  SAY 'MOVING DIRECT FILE TO D DISK'           /* NOTIFY USER */
- 'COPY' USERID 'DIRECT A = = D'               /* INVOKE COPY */
+ 'COPY' USERID 'DIRECT A = = D (REPLACE'      /* INVOKE COPY */
  'ERASE' USERID 'DIRECT A'                    /* INVOKE ERASE */
 RETURN
 
