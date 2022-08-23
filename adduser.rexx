@@ -6,6 +6,8 @@
 
 TRACE E                                      /* ERROR TRACING */
 
+PARSE ARG USERID PASSWD
+
 /* BANNER START */
 SAY "STARTING VINATRON'S DIRMAINT ADD USER FACILITY"
 SAY 'PROPRETY OF:'                           /* BANNER */
@@ -13,11 +15,15 @@ SAY 'VINATRON TECHNOLOGY AND ELECTRICAL'     /* BANNER END */
 
 SIGNAL ON ERROR                              /* TEST RC OF COMMANDS */
 
-SAY 'USERID NAME MUST NOT EXCEED 8 CHAR'     /* REQUEST INPUT */
-PULL USERID                                  /* STORE USERID */
-/* REQUEST INPUT */
-SAY 'PASSWORD FOR USERID MUST NOT EXCEED 8 CHAR'
-PULL PASSWD                                  /* STORE PASSWORD */
+IF LENGTH(USERID) = 0 THEN DO                /* TEST ARG USERID */
+ SAY 'USERID NAME MUST NOT EXCEED 8 CHAR'    /* REQUEST INPUT */
+ PULL USERID                                 /* STORE USERID */
+END                                          /* END IF TEST ARG */
+IF LENGTH(PASSWD) = 0 THEN DO                /* TEST ARG PASSWD */
+ /* REQUEST INPUT */
+ SAY 'PASSWORD FOR USERID MUST NOT EXCEED 8 CHAR'
+ PULL PASSWD                                 /* STORE PASSWORD */
+END                                          /* END IF TEST ARG */
 TEST_USERID:                                 /* JUMP LABEL */
 IF LENGTH(USERID) > 8 THEN DO                /* TEST USERID LENGTH */
  SAY 'INVALID LENGTH INPUT NEW USERID!'      /* NOTIFY USER */
@@ -34,7 +40,7 @@ CALL COPY_FILE                               /* CALL SUB */
 CALL UPDATEPARMS                             /* CALL SUB */
 'DIRM ADD' USERID                            /* INVOKE DIRMAINT */
 CALL MOVE_FILE                               /* MOVE DIRECTORY FILE */
-'AMDISK'                                     /* INVOKE AMDISK ASSIST FACILITY */
+'AMDISK' USERID 191                          /* INVOKE AMDISK ASSIST FACILITY */
 
 EXIT                                         /* END OF PROGRAM */
 
