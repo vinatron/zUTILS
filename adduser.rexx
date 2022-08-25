@@ -1,6 +1,6 @@
 /********************************************
 * VINATRON EXEC WRITTEN BY VINCENT F. MANZO *
-*             JULY 24 2021                  *
+*             AUGEST 24 2022                *
 *  A PROGRAM FOR ASSISTING ADDING USERS     *
 *********************************************/
 
