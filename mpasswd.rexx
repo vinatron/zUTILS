@@ -8,7 +8,7 @@ TRACE E                                      /* ERROR TRACING */
 
 /* BANNER START */
 SAY "STARTING VINATRON'S DIRMAINT PASSWD FACILITY"
-SAY 'PROPRETY OF:'                           /* BANNER */
+SAY 'PROPERTY OF:'                           /* BANNER */
 SAY 'VINATRON TECHNOLOGY AND ELECTRICAL'     /* BANNER END */
 
 SIGNAL ON ERROR                              /* TEST RC OF COMMANDS */
