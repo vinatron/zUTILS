@@ -33,13 +33,22 @@ FILE = 'USER DIRECT C'                       /* FILE VAREABLE */
 LINENUM = 1                                  /* LINE NUMBER VAR */
 DO UNTIL LINES(FILE) = 0                     /* PARSE FILE */
  DIRECT = LINEIN(FILE)                       /* GRAB LINE FROM FILE */
- /* CHECK IF ON USER LINE WITH A PRIV */
- IF (SUBWORD(DIRECT,1,1) = 'USER') & (SUBWORD(DIRECT,6,1) = 'ABCDEFG') THEN DO 
-  USERID = SUBWORD(DIRECT,2,1)               /* GRAB USERID */
-  'DIRM FOR' USERID PW SYSPASS               /* INVOKE DIRMAINT */
+/* CHECK IF ON USER LINE */
+ IF (SUBWORD(DIRECT,1,1) = 'USER')  & (SUBWORD(DIRECT,3,1) \= 'NOLOG') THEN DO  
+  CALL UPDATEPARMS                           /* CALL SUB */
+  LINENUM = LINENUM + 1                      /* INCRIMENT LINE COUNTER */ 
+ END                                         /* END IF */
+ /* CHECK IF ON USER LINE */
+ IF (SUBWORD(DIRECT,1,1) = 'IDENTITY') & (SUBWORD(DIRECT,3,1) \= 'AUTOONLY')
+ THEN DO
+  CALL UPDATEPARMS                           /* CALL SUB */
+  LINENUM = LINENUM + 1                      /* INCRIMENT LINE COUNTER */ 
  END                                         /* END IF */
  LINENUM = LINENUM + 1                       /* INCRIMENT LINE COUNTER */
 END                                          /* END OF LINES */
+
+SAY 'ALL PASWORDS UPDATED WITH' SYSPASS      /* BEGIN BANNER */
+SAY 'THANK YOU FOR USING OUR PRODUCT!'       /* END BANNER */
 
 EXIT                                         /* END OF PROGRAM */
 

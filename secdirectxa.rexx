@@ -30,25 +30,43 @@ END                                          /* END IF */
 /* NOTIFY USER */
 SAY 'REMOVING DEFAULT PASSWORDS AND REPLACING WITH' SYSPASS  
 FILE = 'USER DIRECT C'                       /* FILE VAREABLE */
-'COPY USER DIRECT C BACKUP DIRECT C'         /* COPY BACKUP */
+/* COPY BACKUP */
+'COPY USER DIRECT C BACKUP DIRECT C (REPLACE' 
 LINENUM = 1                                  /* LINE NUMBER VAR */
 DO UNTIL LINES(FILE) = 0                     /* PARSE FILE */
  DIRECT = LINEIN(FILE)                       /* GRAB LINE FROM FILE */
- /* CHECK IF ON USER LINE WITH A PRIV */
- IF (SUBWORD(DIRECT,1,1) = 'USER') & (SUBWORD(DIRECT,6,1) = 'ABCDEFG') THEN DO 
-  PREFIX = SUBWORD(DIRECT,1,2)               /* GRAB LINE PREFIX */
-  SUFFEX = SUBWORD(DIRECT,4,3)               /* GRAB LINE SUFFEX */
-  LINE = PREFIX SYSPASS SUFFEX               /* CONSTRUCT NEW LINE */
-  CALL LINEOUT FILE,LINE,LINENUM             /* WRITE LINE TO FILE */
-  CALL LINEOUT FILE                          /* CLOSE FILE */
-  SAY 'WROTE:' LINE                          /* NOTIFY USER */
-  SAY 'TO FILE:' FILE                        /* NOTIFY USER */
+ /* CHECK IF ON USER LINE */
+ IF (SUBWORD(DIRECT,1,1) = 'USER')  & (SUBWORD(DIRECT,3,1) \= 'NOLOG') THEN DO  
+  CALL UPDATEPARMS                           /* CALL SUB */
+  LINENUM = LINENUM + 1                      /* INCRIMENT LINE COUNTER */ 
+ END                                         /* END IF */
+ /* CHECK IF ON USER LINE */
+ IF (SUBWORD(DIRECT,1,1) = 'IDENTITY') & (SUBWORD(DIRECT,3,1) \= 'AUTOONLY')
+ THEN DO
+  CALL UPDATEPARMS                           /* CALL SUB */
+  LINENUM = LINENUM + 1                      /* INCRIMENT LINE COUNTER */ 
  END                                         /* END IF */
  LINENUM = LINENUM + 1                       /* INCRIMENT LINE COUNTER */
 END                                          /* END OF LINES */
 'DIRECTXA' FILE                              /* INVOKE DIRECTXA */
 
+SAY 'ALL PASWORDS UPDATED WITH' SYSPASS      /* BEGIN BANNER */
+SAY 'THANK YOU FOR USING OUR PRODUCT!'       /* END BANNER */
+
 EXIT                                         /* END OF PROGRAM */
+
+/********************************************
+* UPDATE PARAMETERS SUBROUTINE              *
+*********************************************/  
+UPDATEPARMS:
+  PREFIX = SUBWORD(DIRECT,1,2)               /* GRAB LINE PREFIX */
+  SUFFEX = SUBWORD(DIRECT,4,3)               /* GRAB LINE SUFFEX */
+  LINE = PREFIX SYSPASS SUFFEX               /* CONSTRUCT NEW LINE */
+  CALL LINEOUT FILE,LINE,LINENUM             /* WRITE LINE TO FILE */
+  /*CALL LINEOUT FILE                          /* CLOSE FILE */*/
+  SAY 'WROTE:' LINE                          /* NOTIFY USER */
+  SAY 'TO FILE:' FILE                        /* NOTIFY USER */
+RETURN
 
 /*******************************************************/
 /* ERROR HANDLER: COMMON EXIT FOR NONZERO RETURN CODES */
