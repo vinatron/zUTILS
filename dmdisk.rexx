@@ -1,16 +1,16 @@
 /********************************************
 * VINATRON EXEC WRITTEN BY VINCENT F. MANZO *
-*             AUGEST 24 2022                *
-*  A PROGRAM FOR ASSISTING ADDING MDISK     *
+*             AUGEST 25 2022                *
+*  A PROGRAM FOR ASSISTING DELETING MDISK   *
 *********************************************/
 
 TRACE E                                      /* ERROR TRACING */
 
 /* GRAB ARGUMENTS */
-PARSE ARG USERID ADDR EXTENT DTYPE VOLSER
+PARSE ARG USERID ADDR 
 
 /* BANNER START */
-SAY "STARTING VINATRON'S AMDISK ASSIST FACILITY"
+SAY "STARTING VINATRON'S DMDISK ASSIST FACILITY"
 SAY 'PROPERTY OF:'                           /* BANNER */
 SAY 'VINATRON TECHNOLOGY AND ELECTRICAL'     /* BANNER END */
 
@@ -25,20 +25,8 @@ IF LENGTH(ADDR) = 0 THEN DO                  /* TEST ARG ADDR */
  SAY 'WHAT ADDRESS FOR THE DISK EG 191 FOR CMS A DISK'
  PULL ADDR                                   /* STORE ADDR */
 END                                          /* END IF TEST ARG */
-IF LENGTH(EXTENT) = 0 THEN DO                /* TEST ARG EXTENT */
- SAY 'HOW MANY BLOCKS/CYSL?'                 /* REQUEST INPUT */
- PULL EXTENT                                 /* STORE EXTENT */
-END                                          /* END IF TEST ARG */
-IF LENGTH(DTYPE) = 0 THEN DO                 /* TEST ARG DTYPE */
- SAY 'WHAT DASD TYPE FB-512/3390/3380?'      /* REQUEST INPUT */
- PULL DTYPE                                  /* STORE DASD TYPE */
-END                                          /* END IF TEST ARG */
-IF LENGTH(DTYPE) = 0 THEN DO                 /* TEST ARG VOLSER */
- SAY 'WHAT VOLSER TO ALLOCATE FROM?'         /* REQUEST INPUT */
- PULL VOLSER                                 /* STORE VOLSER */
-END                                          /* END IF TEST ARG */
 /* EXECUTE DIRM COMMAND WITH INPUT OPERANDS */
-'DIRM FOR' USERID 'AMDISK' ADDR DTYPE 'AUTOV' EXTENT VOLSER 'MW'
+'DIRM FOR' USERID 'DMDISK' ADDR 
 
 EXIT                                         /* END OF PROGRAM */
 

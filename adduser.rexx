@@ -1,6 +1,6 @@
 /********************************************
 * VINATRON EXEC WRITTEN BY VINCENT F. MANZO *
-*             JULY 24 2021                  *
+*             AUGEST 24 2022                *
 *  A PROGRAM FOR ASSISTING ADDING USERS     *
 *********************************************/
 
@@ -10,7 +10,7 @@ PARSE ARG USERID PASSWD
 
 /* BANNER START */
 SAY "STARTING VINATRON'S DIRMAINT ADD USER FACILITY"
-SAY 'PROPRETY OF:'                           /* BANNER */
+SAY 'PROPERTY OF:'                           /* BANNER */
 SAY 'VINATRON TECHNOLOGY AND ELECTRICAL'     /* BANNER END */
 
 SIGNAL ON ERROR                              /* TEST RC OF COMMANDS */
@@ -39,7 +39,7 @@ END
 CALL COPY_FILE                               /* CALL SUB */
 CALL UPDATEPARMS                             /* CALL SUB */
 'DIRM ADD' USERID                            /* INVOKE DIRMAINT */
-'CP SLEEP 20 SEC'                            /* SLEEP 20 SECOUNDS */
+'CP SLEEP 5 SEC'                             /* SLEEP 5 SECOUNDS */
 CALL MOVE_FILE                               /* MOVE DIRECTORY FILE */
 'AMDISK' USERID 191                          /* INVOKE AMDISK ASSIST FACILITY */
 
