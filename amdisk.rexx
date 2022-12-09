@@ -33,7 +33,7 @@ IF LENGTH(DTYPE) = 0 THEN DO                 /* TEST ARG DTYPE */
  SAY 'WHAT DASD TYPE FB-512/3390/3380?'      /* REQUEST INPUT */
  PULL DTYPE                                  /* STORE DASD TYPE */
 END                                          /* END IF TEST ARG */
-IF LENGTH(DTYPE) = 0 THEN DO                 /* TEST ARG VOLSER */
+IF LENGTH(VOLSER) = 0 THEN DO                /* TEST ARG VOLSER */
  SAY 'WHAT VOLSER TO ALLOCATE FROM?'         /* REQUEST INPUT */
  PULL VOLSER                                 /* STORE VOLSER */
 END                                          /* END IF TEST ARG */
