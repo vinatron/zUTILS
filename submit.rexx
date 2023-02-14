@@ -1,6 +1,7 @@
 /******************************************************
 *       SUBMIT EXEC WRITTEN BY VINCENT F. MANZO       *
 *                  DECEMBER 9 2022                    *
+*               UPDATE FEBUARY 13 2023                *
 * A PROGRAM FOR ASSISTING STARTING UR DEVICES FOR VSE *
 ******************************************************/
 
@@ -30,6 +31,12 @@ END                                          /* END IF TEST ARG */
 IF LENGTH(FT) = 0 THEN DO                    /* TEST ARG FT */
  SAY 'WHAT IS THE FILE TYPE?'                /* REQUEST INPUT */
  PULL FT                                     /* STORE FT */
+ SIGNAL TEST_ARG                             /* JUMP TO TEST_ARG */
+END                                          /* END IF TEST ARG */
+IF LENGTH(FM) = 0 THEN DO                    /* TEST ARG FM */
+ SAY 'WHAT IS THE FILE MODE?'                /* REQUEST INPUT */
+ SAY 'E.G. A'                                /* REQUEST INPUT */      
+ PULL FT                                     /* STORE FM */
  SIGNAL TEST_ARG                             /* JUMP TO TEST_ARG */
 END                                          /* END IF TEST ARG */
 
