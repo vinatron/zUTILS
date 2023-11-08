@@ -38,7 +38,7 @@ IF LENGTH(DTYPE) = 0 THEN DO                 /* TEST ARG VOLSER */
  PULL VOLSER                                 /* STORE VOLSER */
 END                                          /* END IF TEST ARG */
 /* EXECUTE DIRM COMMAND WITH INPUT OPERANDS */
-'DIRM FOR' USERID 'AMDISK' ADDR DTYPE 'AUTOV' EXTENT VOLSER 'MW'
+'DIRM FOR' USERID 'AMDISK' ADDR DTYPE 'AUTOV' EXTENT VOLSER 'MR'
 
 EXIT                                         /* END OF PROGRAM */
 
