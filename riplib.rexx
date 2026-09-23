@@ -48,7 +48,7 @@ ELSE
 			SAY 'INVALID LIBRARY TYPE MUST BE EITHER LOADLIB OR TXTLIB OR MACLIB'
 			SIGNAL ERROR
 		END
-
+EXIT                                         /* END OF PROGRAM */
 	
 
 /* SUBROUTINES */
